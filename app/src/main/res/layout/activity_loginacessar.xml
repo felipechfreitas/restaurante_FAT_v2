@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Loginacessar">
+
+    <TextView
+    android:id="@+id/txt_header_pg_login_entrar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Entrar"
+    android:textSize="30dp"
+    android:textStyle="bold"
+    android:fontFamily="@font/playfairdisplay_bold_wght"
+    android:layout_marginTop="40dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    />
+
+    <LinearLayout
+        android:id="@+id/layout_inserir_dados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@id/txt_header_pg_login_entrar"
+        >
+
+        <EditText
+            android:id="@+id/txt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:fontFamily="@font/lato_regular"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_borda"
+            android:padding="12dp"
+            />
+
+        <EditText
+            android:id="@+id/txt_senha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Senha"
+            android:inputType="textPassword"
+            android:fontFamily="@font/lato_regular"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_borda"
+            />
+
+        <TextView
+            android:id="@+id/txt_esquecer_senha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Esqueci minha senha?"
+            android:textSize="12dp"
+            android:fontFamily="@font/lato_regular"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_acessar_tela"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:text="Entrar"
+        android:textSize="20sp"
+        android:backgroundTint="@color/btn_comeco"
+        android:fontFamily="@font/playfairdisplay_bold_wght"
+        android:textStyle="bold"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@id/layout_inserir_dados"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/txt_nao_tem_conta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Não tem uma conta?"
+        android:textSize="14sp"
+        android:fontFamily="@font/lato_regular"
+        android:textStyle="normal"
+        app:layout_constraintTop_toBottomOf="@id/btn_acessar_tela"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        />
+
+    <Button
+        android:id="@+id/btn_criar"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:text="Criar"
+        android:textSize="20sp"
+        android:backgroundTint="@color/btn_criar"
+        android:fontFamily="@font/playfairdisplay_bold_wght"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/txt_nao_tem_conta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/img_logo_entrar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logoprincipal"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_criar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

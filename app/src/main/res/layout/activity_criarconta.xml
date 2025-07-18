@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Criarconta">
+
+    <TextView
+        android:id="@+id/txt_header_pg_criar_conta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Criar"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/playfairdisplay_bold_wght"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <LinearLayout
+        android:id="@+id/layout_criar_conta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@id/txt_header_pg_criar_conta"
+        >
+
+        <EditText
+            android:id="@+id/txt_insert_nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nome Completo"
+            android:fontFamily="@font/lato_regular"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_borda"
+            android:padding="12dp"
+            />
+
+        <EditText
+            android:id="@+id/txt_insert_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:fontFamily="@font/lato_regular"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_borda"
+            android:padding="12dp"
+            />
+
+        <EditText
+            android:id="@+id/txt_insert_endereco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Endereço"
+            android:fontFamily="@font/lato_regular"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_borda"
+            android:padding="12dp"
+            />
+
+        <EditText
+            android:id="@+id/txt_insert_cep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="CEP"
+            android:fontFamily="@font/lato_regular"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_borda"
+            android:padding="12dp"
+            />
+
+        <EditText
+            android:id="@+id/txt_insert_senha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Senha"
+            android:fontFamily="@font/lato_regular"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_borda"
+            android:padding="12dp"
+            />
+
+        <EditText
+            android:id="@+id/txt_insert_confirm_senha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirmar a Senha"
+            android:fontFamily="@font/lato_regular"
+            android:background="@drawable/edit_text_borda"
+            android:padding="12dp"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_criar_conta"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:text="Criar Conta"
+        android:textSize="20sp"
+        android:backgroundTint="@color/btn_comeco"
+        android:fontFamily="@font/playfairdisplay_bold_wght"
+        android:textStyle="bold"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@id/layout_criar_conta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+<!--    alterar novo-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
