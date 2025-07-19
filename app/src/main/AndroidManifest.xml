@@ -13,6 +13,16 @@
         android:theme="@style/Theme.RestauranteComeuPagou"
         tools:targetApi="31">
         <activity
+            android:name=".Testemodelo"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".Recuperarconta"
             android:exported="false" />
         <activity
@@ -24,11 +34,11 @@
         <activity
             android:name=".Loginacessar"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".Login"
