@@ -7,27 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".Menuprincipal">
 
+    <include
+        android:id="@+id/header"
+        layout="@layout/layout_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <LinearLayout
         android:id="@+id/layout_header_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:padding="5dp"
         android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/header"
         >
-
-        <ImageView
-            android:id="@+id/img_logo_entrar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/logoprincipal"
-            />
-        
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/txt_header_menu"
@@ -35,13 +32,9 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/playfairdisplay_bold_wght"
             android:text="Tela inicial"
-            android:textSize="30dp"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
     </LinearLayout>
 
     <EditText
@@ -203,6 +196,17 @@
         android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@id/layout_category"
         />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="true"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item"
+        app:layout_constraintTop_toBottomOf="@id/txt_header_destaque"
+        />
+
 
 <!--    ALTERACAO TESTE PRA SUBIR no github-->
 <!--    nova alteracao teste github-->
