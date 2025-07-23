@@ -1,6 +1,10 @@
 package com.example.restaurantecomeupagou;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,10 +19,22 @@ import java.util.List;
 public class Menuprincipal extends AppCompatActivity {
 
     private RecyclerView listaProdutoDestaque;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        preferences = getSharedPreferences("restaurantecomeupagou.preferences", MODE_PRIVATE);
+        boolean estaLogado = preferences.getBoolean("estaLogado", false);
+
+        if (!estaLogado) {
+            Intent intent = new Intent(Menuprincipal.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_menuprincipal);
 
         listaProdutoDestaque = findViewById(R.id.recycler);
@@ -32,5 +48,16 @@ public class Menuprincipal extends AppCompatActivity {
         ProductAdapter adapter = new ProductAdapter(produtos);
         listaProdutoDestaque.setAdapter(adapter);
 
+    }
+
+    public void sair (View view) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("estaLogado", false);
+        editor.apply();
+
+        Toast.makeText(Menuprincipal.this, "Logoff com sucesso", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(Menuprincipal.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

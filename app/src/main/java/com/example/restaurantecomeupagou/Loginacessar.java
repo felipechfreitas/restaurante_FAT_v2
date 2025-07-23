@@ -1,6 +1,7 @@
 package com.example.restaurantecomeupagou;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -74,13 +75,30 @@ public class Loginacessar extends AppCompatActivity {
                     errorFocusView.requestFocus();
                     Toast.makeText(Loginacessar.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else {
+                    SharedPreferences preferences = getSharedPreferences("restaurantecomeupagou.preferences", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putBoolean("estaLogado", true);
+                    editor.apply();
+
                     Toast.makeText(Loginacessar.this, "Logado com sucesso", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Loginacessar.this, Menuprincipal.class);
                     startActivity(intent);
+                    finish();
                 }
-
             }
         });
-
     }
+
+    public void irRecuperarConta (View view) {
+        Intent intent = new Intent(Loginacessar.this, Recuperarconta.class);
+        startActivity(intent);
+    }
+
+    public void irCriarConta (View view) {
+        Intent intent = new Intent(Loginacessar.this, Criarconta.class);
+        startActivity(intent);
+    }
+
+
+
 }

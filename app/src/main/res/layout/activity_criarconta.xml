@@ -7,6 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".Criarconta">
 
+    <include
+        android:id="@+id/header"
+        layout="@layout/layout_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <TextView
         android:id="@+id/txt_header_pg_criar_conta"
         android:layout_width="wrap_content"
@@ -15,10 +25,10 @@
         android:textSize="30dp"
         android:textStyle="bold"
         android:fontFamily="@font/playfairdisplay_bold_wght"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
         />
 
     <LinearLayout
@@ -26,8 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="30dp"
-        android:layout_marginTop="40dp"
+        android:padding="20dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintTop_toBottomOf="@id/txt_header_pg_criar_conta"
         >
 
@@ -76,7 +86,7 @@
             />
 
         <EditText
-            android:id="@+id/txt_insert_senha"
+            android:id="@+id/txt_insert_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Senha"
@@ -87,7 +97,7 @@
             />
 
         <EditText
-            android:id="@+id/txt_insert_confirm_senha"
+            android:id="@+id/txt_insert_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Confirmar a Senha"
@@ -99,7 +109,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_criar_conta"
+        android:id="@+id/btn_create_account"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:text="Criar Conta"
@@ -107,7 +117,7 @@
         android:backgroundTint="@color/btn_comeco"
         android:fontFamily="@font/playfairdisplay_bold_wght"
         android:textStyle="bold"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintTop_toBottomOf="@id/layout_criar_conta"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
