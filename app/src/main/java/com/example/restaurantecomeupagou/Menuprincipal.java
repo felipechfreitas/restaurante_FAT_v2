@@ -20,6 +20,7 @@ public class Menuprincipal extends AppCompatActivity {
 
     private RecyclerView listaProdutoDestaque;
     SharedPreferences preferences;
+//    adiçAo
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
