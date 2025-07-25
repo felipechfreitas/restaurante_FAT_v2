@@ -11,6 +11,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.restaurantecomeupagou.data.remote.UsuarioApiClient;
+import com.example.restaurantecomeupagou.model.Usuario;
+
 public class Loginacessar extends AppCompatActivity {
 
     private EditText txt_email;
@@ -75,16 +78,52 @@ public class Loginacessar extends AppCompatActivity {
                     errorFocusView.requestFocus();
                     Toast.makeText(Loginacessar.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else {
-                    SharedPreferences preferences = getSharedPreferences("restaurantecomeupagou.preferences", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putBoolean("estaLogado", true);
-                    editor.apply();
+                    autenticarComApi(email, senha);
+//                    SharedPreferences preferences = getSharedPreferences("restaurantecomeupagou.preferences", MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = preferences.edit();
+//                    editor.putBoolean("estaLogado", true);
+//                    editor.apply();
 
-                    Toast.makeText(Loginacessar.this, "Logado com sucesso", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Loginacessar.this, Menuprincipal.class);
-                    startActivity(intent);
-                    finish();
+//                    Toast.makeText(Loginacessar.this, "Logado com sucesso", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(Loginacessar.this, Menuprincipal.class);
+//                    startActivity(intent);
+//                    finish();
                 }
+            }
+        });
+    }
+
+    private void autenticarComApi(String email, String senha) {
+        Toast.makeText(Loginacessar.this, "Verificando credenciais...", Toast.LENGTH_SHORT).show();
+
+        UsuarioApiClient.getInstance(this).autenticarUsuario(email, senha, new UsuarioApiClient.LoginCallback() {
+            @Override
+            public void onSuccess(Usuario usuarioLogado) {
+                Toast.makeText(Loginacessar.this, "Login bem-sucedido! Bem-vindo(a), " + usuarioLogado.getNome() + "!", Toast.LENGTH_SHORT).show();
+
+                SharedPreferences preferences = getSharedPreferences("restaurantecomeupagou.preferences", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("estaLogado", true);
+                editor.putString("emailUsuario", usuarioLogado.getEmail());
+                editor.putString("nomeUsuario", usuarioLogado.getNome());
+                editor.apply();
+
+                Intent intent = new Intent(Loginacessar.this, Menuprincipal.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                Toast.makeText(Loginacessar.this, "Erro de comunicação: " + errorMessage, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCredenciaisInvalidas() {
+                Toast.makeText(Loginacessar.this, "E-mail ou senha inválidos.", Toast.LENGTH_LONG).show();
+                txt_email.setError("Verifique suas credenciais");
+                txt_senha.setError("Verifique suas credenciais");
+                txt_email.requestFocus();
             }
         });
     }

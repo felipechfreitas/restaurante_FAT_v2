@@ -51,6 +51,11 @@ public class Menuprincipal extends AppCompatActivity {
 
     }
 
+    public void irCatalog(View view) {
+        Intent intent = new Intent(Menuprincipal.this, CatalogActivity.class);
+        startActivity(intent);
+    }
+
     public void sair (View view) {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean("estaLogado", false);

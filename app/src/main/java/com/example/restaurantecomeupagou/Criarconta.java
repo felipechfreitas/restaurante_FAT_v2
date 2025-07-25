@@ -11,12 +11,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.restaurantecomeupagou.data.remote.UsuarioApiClient;
+import com.example.restaurantecomeupagou.model.Usuario;
+
 public class Criarconta extends AppCompatActivity {
 
     private EditText txt_insert_nome;
     private EditText txt_insert_email;
-    private EditText txt_insert_endereco;
-    private EditText txt_insert_cep;
+    private EditText txt_insert_telefone;
     private EditText txt_insert_password;
     private EditText txt_insert_confirm_password;
     private Button btn_create_account;
@@ -28,8 +30,7 @@ public class Criarconta extends AppCompatActivity {
 
         txt_insert_nome = findViewById(R.id.txt_insert_nome);
         txt_insert_email = findViewById(R.id.txt_insert_email);
-        txt_insert_endereco = findViewById(R.id.txt_insert_endereco);
-        txt_insert_cep = findViewById(R.id.txt_insert_cep);
+        txt_insert_telefone = findViewById(R.id.txt_insert_telefone);
         txt_insert_password = findViewById(R.id.txt_insert_password);
         txt_insert_confirm_password = findViewById(R.id.txt_insert_confirm_password);
         btn_create_account = findViewById(R.id.btn_create_account);
@@ -37,16 +38,15 @@ public class Criarconta extends AppCompatActivity {
         btn_create_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nome = txt_insert_nome.getText().toString();
+                String nomeCompleto = txt_insert_nome.getText().toString();
                 String email = txt_insert_email.getText().toString().trim();
-                String endereco = txt_insert_endereco.getText().toString();
-                String cep = txt_insert_cep.getText().toString();
+                String telefone = txt_insert_telefone.getText().toString().trim();
                 String password = txt_insert_password.getText().toString().trim();
                 String confirmPassword = txt_insert_confirm_password.getText().toString().trim();
                 View errorCadastroView = null;
                 boolean containError = false;
 
-                if (nome.isEmpty()) {
+                if (nomeCompleto.isEmpty()) {
                     txt_insert_nome.setError("Preencha o nome");
                     if (errorCadastroView == null) {
                         errorCadastroView = txt_insert_nome;
@@ -74,18 +74,10 @@ public class Criarconta extends AppCompatActivity {
                     containError = true;
                 }
 
-                if (endereco.isEmpty()) {
-                    txt_insert_endereco.setError("Preencha o nome");
+                if (telefone.isEmpty()) {
+                    txt_insert_telefone.setError("Preencha o telefone");
                     if (errorCadastroView == null) {
-                        errorCadastroView = txt_insert_endereco;
-                    }
-                    containError = true;
-                }
-
-                if (cep.isEmpty()) {
-                    txt_insert_cep.setError("Preencha o nome");
-                    if (errorCadastroView == null) {
-                        errorCadastroView = txt_insert_cep;
+                        errorCadastroView = txt_insert_telefone;
                     }
                     containError = true;
                 }
@@ -142,19 +134,62 @@ public class Criarconta extends AppCompatActivity {
                     errorCadastroView.requestFocus();
                     Toast.makeText(Criarconta.this, "Revise os campos com erro", Toast.LENGTH_SHORT).show();
                 } else {
-                    SharedPreferences preferences = getSharedPreferences("restaurantecomeupagou.preferences", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putBoolean("estaLogado", true);
-                    editor.apply();
-
-                    Toast.makeText(Criarconta.this, "Conta criada com sucesso", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Criarconta.this, Menuprincipal.class);
-                    startActivity(intent);
-                    finish();
+                    checkEmailandRegister (nomeCompleto,email, telefone, password);
+//                    SharedPreferences preferences = getSharedPreferences("restaurantecomeupagou.preferences", MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = preferences.edit();
+//                    editor.putBoolean("estaLogado", true);
+//                    editor.apply();
+//
+//                    Toast.makeText(Criarconta.this, "Conta criada com sucesso", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(Criarconta.this, Loginacessar.class);
+//                    startActivity(intent);
+//                    finish();
                 }
 
             }
         });
 
+    }
+
+    private void checkEmailandRegister(final String nomeCompleto, final String email, final String telefone, final String senha) {
+        Toast.makeText(this, "Verificando e-mail...", Toast.LENGTH_SHORT).show();
+
+        UsuarioApiClient.getInstance(this).verificarEmailUnico(email, new UsuarioApiClient.EmailCheckCallback() {
+            @Override
+            public void onSuccess(boolean isUnique) {
+                if (isUnique) {
+                    cadastrarUsuario(new Usuario(nomeCompleto, email, telefone, senha));
+                } else {
+                    txt_insert_email.setError("Este e-mail já está cadastrado.");
+                    txt_insert_email.requestFocus();
+                    Toast.makeText(Criarconta.this, "E-mail já cadastrado.", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                Toast.makeText(Criarconta.this, "Erro ao verificar e-mail: " + errorMessage, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void cadastrarUsuario(Usuario usuario) {
+        Toast.makeText(this, "Cadastrando usuário...", Toast.LENGTH_SHORT).show();
+
+        UsuarioApiClient.getInstance(this).cadastrarUsuario(usuario, new UsuarioApiClient.RegisterUserCallback() {
+            @Override
+            public void onSuccess(Usuario usuarioCadastrado) {
+                Toast.makeText(Criarconta.this, "Cadastro realizado com sucesso!", Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(Criarconta.this, Loginacessar.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                Toast.makeText(Criarconta.this, "Falha no cadastro: " + errorMessage, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
