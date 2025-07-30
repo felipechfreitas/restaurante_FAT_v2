@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="btn_comeco">#F1C40F</color>
     <color name="btn_criar">#808080</color>
+    <color name="btn_add">#E74C3C</color>
 </resources>

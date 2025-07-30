@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.restaurantecomeupagou.R;
 import com.example.restaurantecomeupagou.model.Produto;
 
@@ -42,7 +43,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProdutoV
     @NonNull
     @Override
     public ProdutoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_card, parent, false);
         return new ProdutoViewHolder(view);
     }
 
@@ -50,7 +51,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProdutoV
     public void onBindViewHolder(@NonNull ProdutoViewHolder holder, int position) {
         Produto produto = produtos.get(position);
 
-        holder.imagemProduto.setImageResource(produto.getImagemurl());
+        Glide.with(holder.itemView.getContext())
+                .load(produto.getImagemUrl())
+                .placeholder(R.drawable.product_image_placeholder)
+                .into(holder.imagemProduto);
+
         holder.nomeProduto.setText(produto.getNome());
         holder.descricaoProduto.setText(produto.getDescricao());
 

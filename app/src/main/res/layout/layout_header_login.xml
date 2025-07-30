@@ -4,23 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:gravity="center_horizontal"
     android:paddingHorizontal="16dp"
-    android:paddingVertical="8dp"
-    >
+    android:paddingVertical="8dp">
 
     <ImageView
         android:id="@+id/image_view_logo_header"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:src="@drawable/logoprincipal"
+        android:layout_height="50dp"
         android:clickable="true"
-        android:contentDescription="Logo"
         android:focusable="true"
+        android:src="@drawable/logoprincipal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_view_logged_in_user"
@@ -36,21 +32,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/button_logout_header"
         app:layout_constraintStart_toEndOf="@id/image_view_logo_header"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/button_logout_header"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Sair da conta"
-        android:padding="12dp"
-        android:src="@drawable/ic_logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/black" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

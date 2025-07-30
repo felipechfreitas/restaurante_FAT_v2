@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.restaurantecomeupagou.adapter.ProductAdapter;
+import com.example.restaurantecomeupagou.data.remote.ProdutoApiClient;
 import com.example.restaurantecomeupagou.model.Produto;
 
 import java.util.ArrayList;
@@ -41,14 +42,31 @@ public class Menuprincipal extends AppCompatActivity {
         listaProdutoDestaque = findViewById(R.id.recycler);
         listaProdutoDestaque.setLayoutManager(new LinearLayoutManager(this));
 
-        List<Produto> produtos = new ArrayList<>();
-        produtos.add(new Produto("Bife a cavalo", "Descricao do produto 1", 45.00, R.drawable.bac));
-        produtos.add(new Produto("Bife a parmegiana", "Descricao do produto 2", 35.00, R.drawable.bife));
-        produtos.add(new Produto("File de Frango", "Descricao do produto 3", 28.00, R.drawable.fg));
+//        List<Produto> produtos = new ArrayList<>();
+//        produtos.add(new Produto("Bife a cavalo", "Descricao do produto 1", 45.00, R.drawable.bac));
+//        produtos.add(new Produto("Bife a parmegiana", "Descricao do produto 2", 35.00, R.drawable.bife));
+//        produtos.add(new Produto("File de Frango", "Descricao do produto 3", 28.00, R.drawable.fg));
 
-        ProductAdapter adapter = new ProductAdapter(produtos);
-        listaProdutoDestaque.setAdapter(adapter);
+        obterProdutosDestaques();
 
+//        ProductAdapter adapter = new ProductAdapter(produtos);
+//        listaProdutoDestaque.setAdapter(adapter);
+
+    }
+
+    private void obterProdutosDestaques() {
+        ProdutoApiClient.getInstance(this).obterProdutos(new ProdutoApiClient.ProdutoCallback() {
+            @Override
+            public void onSuccess(List<Produto> produtos) {
+                ProductAdapter adapter = new ProductAdapter(produtos);
+                listaProdutoDestaque.setAdapter(adapter);
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                Toast.makeText(Menuprincipal.this, "Erro ao listar produtos: " + errorMessage, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void irCatalog(View view) {
@@ -56,14 +74,14 @@ public class Menuprincipal extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void sair (View view) {
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("estaLogado", false);
-        editor.apply();
-
-        Toast.makeText(Menuprincipal.this, "Logoff com sucesso", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(Menuprincipal.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
+//    public void sair (View view) {
+//        SharedPreferences.Editor editor = preferences.edit();
+//        editor.putBoolean("estaLogado", false);
+//        editor.apply();
+//
+//        Toast.makeText(Menuprincipal.this, "Logoff com sucesso", Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(Menuprincipal.this, MainActivity.class);
+//        startActivity(intent);
+//        finish();
+//    }
 }

@@ -7,9 +7,9 @@
     android:layout_height="match_parent"
     tools:context=".Criarconta">
 
-    <include
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/header"
-        layout="@layout/layout_header"
+        android:name="com.example.restaurantecomeupagou.HeaderFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"

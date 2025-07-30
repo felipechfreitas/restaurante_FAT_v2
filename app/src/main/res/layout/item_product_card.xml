@@ -20,7 +20,7 @@
             android:contentDescription="imagem do produto"
             android:layout_marginEnd="12dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/bac"
+            android:src="@drawable/product_image_placeholder"
             />
 
         <LinearLayout
@@ -34,6 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Prato 1"
+                android:fontFamily="@font/playfairdisplay_bold_wght"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:textColor="#000000" />
@@ -43,6 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Descrição do prato 1"
+                android:fontFamily="@font/lato_regular"
                 android:textSize="14sp"
                 android:textColor="#666666"
                 android:layout_marginTop="2dp" />
@@ -59,6 +61,20 @@
                 />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/button_add_to_cart"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/btn_add"
+            android:contentDescription="Adicionar ao Carrinho"
+            android:padding="0dp"
+            android:text="+"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            />
 
     </LinearLayout>
 

@@ -1,16 +1,17 @@
 package com.example.restaurantecomeupagou.model;
 
 public class Produto {
+    private int id;
     private String nome;
     private String descricao;
     private double preco;
-    private int imagemurl;
+    private String imagemUrl;
 
-    public Produto(String nome, String descricao, double preco, int imagemurl) {
+    public Produto(int id, String nome, String descricao, double preco, String imagemUrl) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
-        this.imagemurl = imagemurl;
+        this.imagemUrl = imagemUrl;
     }
 
     public String getNome() {
@@ -22,8 +23,8 @@ public class Produto {
     public double getPreco() {
         return preco;
     }
-    public int getImagemurl() {
-        return imagemurl;
+    public String getImagemUrl() {
+        return imagemUrl;
     }
 
 }
