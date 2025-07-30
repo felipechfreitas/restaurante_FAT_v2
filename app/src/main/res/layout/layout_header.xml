@@ -9,18 +9,30 @@
     android:paddingVertical="8dp"
     >
 
-    <ImageView
-        android:id="@+id/image_view_logo_header"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:src="@drawable/logoprincipal"
-        android:clickable="true"
-        android:contentDescription="Logo"
-        android:focusable="true"
+    <ImageButton
+        android:id="@+id/button_hamburguer_menu"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Menu"
+        android:padding="12dp"
+        android:src="@drawable/ic_menu_hamburguer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:tint="@color/black" />
+
+    <ImageView
+        android:id="@+id/image_view_logo_header"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:clickable="true"
+        android:contentDescription="Logo"
+        android:focusable="true"
+        android:src="@drawable/logoprincipal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_hamburguer_menu"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_view_logged_in_user"
@@ -31,7 +43,7 @@
         android:ellipsize="end"
         android:gravity="end"
         android:maxLines="1"
-        android:text="Olá, [Nome do Usuário]!"
+        android:text="[Nome do Usuário]"
         android:textColor="@color/btn_comeco"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -52,5 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/black" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

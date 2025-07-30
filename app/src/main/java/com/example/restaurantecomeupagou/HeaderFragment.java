@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,7 @@ public class HeaderFragment extends Fragment {
     private TextView textViewLoggedInUser;
     private ImageView imageViewLogoHeader;
     private ImageButton buttonLogoutHeader;
+    private ImageButton buttonHamburguerMenu;
 
     @NonNull
     @Override
@@ -29,6 +32,7 @@ public class HeaderFragment extends Fragment {
         textViewLoggedInUser = view.findViewById(R.id.text_view_logged_in_user);
         imageViewLogoHeader = view.findViewById(R.id.image_view_logo_header);
         buttonLogoutHeader = view.findViewById(R.id.button_logout_header);
+        buttonHamburguerMenu = view.findViewById(R.id.button_hamburguer_menu);
 
         loadUserName();
 
@@ -48,13 +52,57 @@ public class HeaderFragment extends Fragment {
             }
         });
 
+        buttonHamburguerMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showMenu(v);
+            }
+        });
+
         return view;
+    }
+
+    private void showMenu(View v) {
+        PopupMenu menu = new PopupMenu(getActivity(), v);
+        menu.getMenuInflater().inflate(R.menu.layout_menu_options, menu.getMenu());
+
+        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int id = item.getItemId();
+                Intent intent = null;
+
+                if (id == R.id.item_home) {
+                    intent = new Intent(getActivity(), Menuprincipal.class);
+                }
+
+                if (id == R.id.item_catalog) {
+                    intent = new Intent(getActivity(), CatalogActivity.class);
+                }
+
+                if (id == R.id.item_profile) {
+                    intent = new Intent(getActivity(), UserProfileActivity.class);
+                }
+
+                if (intent != null) {
+                    startActivity(intent);
+
+                    if (!(getActivity() instanceof MainActivity)) {
+                        getActivity().finish();
+                    }
+                }
+
+                return true;
+            }
+        });
+
+        menu.show();
     }
 
     private void loadUserName() {
         SharedPreferences preferences = getActivity().getSharedPreferences("restaurantecomeupagou.preferences", MODE_PRIVATE);
         String userName = preferences.getString("nomeUsuario", "");
-        textViewLoggedInUser.setText("Olá, " + userName + "!");
+        textViewLoggedInUser.setText(userName);
     }
 
     public void logout() {
