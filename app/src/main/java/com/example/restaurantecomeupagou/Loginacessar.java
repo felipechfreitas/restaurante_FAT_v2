@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.restaurantecomeupagou.data.remote.UsuarioApiClient;
 import com.example.restaurantecomeupagou.model.Usuario;
+import com.example.restaurantecomeupagou.utils.Constants;
 
 public class Loginacessar extends AppCompatActivity {
 
@@ -101,11 +102,12 @@ public class Loginacessar extends AppCompatActivity {
             public void onSuccess(Usuario usuarioLogado) {
                 Toast.makeText(Loginacessar.this, "Login bem-sucedido! Bem-vindo(a), " + usuarioLogado.getNome() + "!", Toast.LENGTH_SHORT).show();
 
-                SharedPreferences preferences = getSharedPreferences("restaurantecomeupagou.preferences", MODE_PRIVATE);
+                SharedPreferences preferences = getSharedPreferences(Constants.SHARED_PREFERENCES_AUTENTICACAO, MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean("estaLogado", true);
                 editor.putString("emailUsuario", usuarioLogado.getEmail());
                 editor.putString("nomeUsuario", usuarioLogado.getNome());
+                editor.putString("idUsuario", usuarioLogado.getId());
                 editor.apply();
 
                 Intent intent = new Intent(Loginacessar.this, Menuprincipal.class);

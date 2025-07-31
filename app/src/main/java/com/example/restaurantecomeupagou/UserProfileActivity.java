@@ -1,6 +1,11 @@
 package com.example.restaurantecomeupagou;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,17 +13,55 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.restaurantecomeupagou.data.remote.UsuarioApiClient;
+import com.example.restaurantecomeupagou.model.Usuario;
+import com.example.restaurantecomeupagou.utils.Constants;
+
 public class UserProfileActivity extends AppCompatActivity {
+
+    private EditText editTextFullName;
+    private EditText editTextRegisterEmail;
+    private EditText editTextPhone;
+    private EditText editTextRegisterPassword;
+    private EditText editTextConfirmPassword;
+    private Button buttonEditProfile;
+    private SharedPreferences preferences;
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_user_profile);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        editTextFullName = findViewById(R.id.edit_text_full_name);
+        editTextRegisterEmail = findViewById(R.id.edit_text_register_email);
+        editTextPhone = findViewById(R.id.edit_text_phone);
+        editTextRegisterPassword = findViewById(R.id.edit_text_register_password);
+        editTextConfirmPassword = findViewById(R.id.edit_text_confirm_password);
+        buttonEditProfile = findViewById(R.id.button_edit_profile);
+
+        SharedPreferences preferences = getSharedPreferences(Constants.SHARED_PREFERENCES_AUTENTICACAO, MODE_PRIVATE);
+        String idUsuario = preferences.getString("idUsuario", null);
+
+        obterUsuarioPorId(idUsuario);
+
+    }
+
+    private void obterUsuarioPorId(String id) {
+        UsuarioApiClient.getInstance(this).obterUsuarioPorId(id, new UsuarioApiClient.UsuarioPorIdCallback() {
+            @Override
+            public void onSuccess(Usuario u) {
+                usuario = u;
+                editTextFullName.setText(usuario.getNome());
+                editTextRegisterEmail.setText(usuario.getEmail());
+                editTextPhone.setText(usuario.getTelefone());
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                Log.e("UserProfileActivity", "Erro ao obter usuário: " + errorMessage);
+                Toast.makeText(UserProfileActivity.this, "Erro ao obter usuário: " + errorMessage, Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }

@@ -18,6 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.restaurantecomeupagou.utils.Constants;
+
 public class HeaderFragment extends Fragment {
     private TextView textViewLoggedInUser;
     private ImageView imageViewLogoHeader;
@@ -100,13 +102,13 @@ public class HeaderFragment extends Fragment {
     }
 
     private void loadUserName() {
-        SharedPreferences preferences = getActivity().getSharedPreferences("restaurantecomeupagou.preferences", MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences(Constants.SHARED_PREFERENCES_AUTENTICACAO, MODE_PRIVATE);
         String userName = preferences.getString("nomeUsuario", "");
         textViewLoggedInUser.setText(userName);
     }
 
     public void logout() {
-        SharedPreferences preferences = getActivity().getSharedPreferences("restaurantecomeupagou.preferences", MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences(Constants.SHARED_PREFERENCES_AUTENTICACAO, MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.clear();
         editor.apply();
