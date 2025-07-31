@@ -1,5 +1,7 @@
 package com.example.restaurantecomeupagou.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.restaurantecomeupagou.ProductDetailActivity;
 import com.example.restaurantecomeupagou.R;
 import com.example.restaurantecomeupagou.model.Produto;
+import com.example.restaurantecomeupagou.utils.Constants;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -19,9 +23,11 @@ import java.util.Locale;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProdutoViewHolder> {
     private List<Produto> produtos;
+    private Context context;
 
-    public ProductAdapter(List<Produto> produtos) {
+    public ProductAdapter(List<Produto> produtos, Context context) {
         this.produtos = produtos;
+        this.context = context;
     }
 
     public class ProdutoViewHolder extends RecyclerView.ViewHolder {
@@ -33,9 +39,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProdutoV
         public ProdutoViewHolder(View itemView) {
             super(itemView);
             imagemProduto = itemView.findViewById(R.id.img_item);
-            nomeProduto = itemView.findViewById(R.id.txt_nome_prato);
-            descricaoProduto = itemView.findViewById(R.id.txt_desc_prato);
-            precoProduto = itemView.findViewById(R.id.txt_preco_prato);
+            nomeProduto = itemView.findViewById(R.id.txt_nome_produto);
+            descricaoProduto = itemView.findViewById(R.id.txt_desc_produto);
+            precoProduto = itemView.findViewById(R.id.txt_preco_produto);
 
         }
     }
@@ -61,6 +67,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProdutoV
 
         NumberFormat precoBr = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
         holder.precoProduto.setText(precoBr.format(produto.getPreco()));
+
+
+        holder.nomeProduto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ProductDetailActivity.class);
+                intent.putExtra(Constants.INTENT_PRODUTO_ID, String.valueOf(produto.getId()));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

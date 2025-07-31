@@ -83,7 +83,7 @@
                 >
 
                 <LinearLayout
-                    android:id="@+id/category_pratos"
+                    android:id="@+id/category_lanches"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -91,12 +91,14 @@
                     android:gravity="center"
                     android:padding="16dp"
                     android:layout_margin="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:background="@color/white"
                     android:elevation="4dp"
                     >
             
                     <ImageView
-                        android:id="@+id/img_category_pratos"
+                        android:id="@+id/img_category_lanches"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/pratoscategory"
@@ -111,74 +113,77 @@
                         android:layout_marginTop="5dp"
                         />
 
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/category_porcoes"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="16dp"
-                android:layout_margin="8dp"
-                android:background="@color/white"
-                android:elevation="4dp"
-                >
-
-                <ImageView
-                    android:id="@+id/img_category_porcoes"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/porcoescategory"
-                    />
-
-                <TextView
-                    android:id="@+id/txt_category_porcoes"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/category_porcoes"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Porcoes"
-                    android:fontFamily="@font/latoregular"
-                    android:textStyle="bold"
-                    android:layout_marginTop="5dp"
-                    />
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:layout_margin="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@color/white"
+                    android:elevation="4dp"
+                    >
 
-            </LinearLayout>
+                    <ImageView
+                        android:id="@+id/img_category_porcoes"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/porcoescategory"
+                        />
 
-            <LinearLayout
-                android:id="@+id/category_drink"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="16dp"
-                android:layout_margin="8dp"
-                android:background="@color/white"
-                android:elevation="4dp"
-                >
+                    <TextView
+                        android:id="@+id/txt_category_porcoes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Porcoes"
+                        android:fontFamily="@font/latoregular"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        />
 
-                <ImageView
-                    android:id="@+id/img_category_drink"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/bebidascategory"
-                    />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/txt_category_drink"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/category_bebidas"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Bebidas"
-                    android:fontFamily="@font/latoregular"
-                    android:textStyle="bold"
-                    android:layout_marginTop="5dp"
-                    />
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:layout_margin="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@color/white"
+                    android:elevation="4dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/img_category_bebidas"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/bebidascategory"
+                        />
+
+                    <TextView
+                        android:id="@+id/txt_category_drink"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bebidas"
+                        android:fontFamily="@font/latoregular"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        />
+
+                </LinearLayout>
 
             </LinearLayout>
-
-
-        </LinearLayout>
 
         <TextView
             android:id="@+id/txt_header_destaque"

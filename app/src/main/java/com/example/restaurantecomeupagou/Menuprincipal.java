@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.restaurantecomeupagou.adapter.ProductAdapter;
 import com.example.restaurantecomeupagou.data.remote.ProdutoApiClient;
 import com.example.restaurantecomeupagou.model.Produto;
+import com.example.restaurantecomeupagou.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,9 @@ public class Menuprincipal extends AppCompatActivity {
 
     private RecyclerView listaProdutoDestaque;
     SharedPreferences preferences;
-//    adiçAo
+    LinearLayout linearButtonLanches;
+    LinearLayout linearButtonPorcoes;
+    LinearLayout linearButtonBebidas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,29 @@ public class Menuprincipal extends AppCompatActivity {
 
         obterProdutosDestaques();
 
+        linearButtonLanches = findViewById(R.id.category_lanches);
+        linearButtonLanches.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                irCatalog(v, "L");
+            }
+        });
+
+        linearButtonPorcoes = findViewById(R.id.category_porcoes);
+        linearButtonPorcoes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                irCatalog(v, "P");
+            }
+        });
+
+        linearButtonBebidas = findViewById(R.id.category_bebidas);
+        linearButtonBebidas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                irCatalog(v, "B");
+            }
+        });
 //        ProductAdapter adapter = new ProductAdapter(produtos);
 //        listaProdutoDestaque.setAdapter(adapter);
 
@@ -58,7 +85,7 @@ public class Menuprincipal extends AppCompatActivity {
         ProdutoApiClient.getInstance(this).obterProdutos(new ProdutoApiClient.ProdutoCallback() {
             @Override
             public void onSuccess(List<Produto> produtos) {
-                ProductAdapter adapter = new ProductAdapter(produtos);
+                ProductAdapter adapter = new ProductAdapter(produtos, Menuprincipal.this);
                 listaProdutoDestaque.setAdapter(adapter);
             }
 
@@ -69,8 +96,9 @@ public class Menuprincipal extends AppCompatActivity {
         });
     }
 
-    public void irCatalog(View view) {
+    public void irCatalog(View view, String categoria) {
         Intent intent = new Intent(Menuprincipal.this, CatalogActivity.class);
+        intent.putExtra(Constants.INTENT_CATEGORIA, categoria);
         startActivity(intent);
     }
 

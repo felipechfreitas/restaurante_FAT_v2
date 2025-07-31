@@ -17,13 +17,161 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
+    <LinearLayout
+        android:id="@+id/layout_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:gravity="center"
+        android:weightSum="4"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        >
+
+        <LinearLayout
+            android:id="@+id/category_lanches"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="16dp"
+            android:layout_margin="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@color/white"
+            android:elevation="4dp"
+            >
+
+            <ImageView
+                android:id="@+id/img_category_lanches"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/pratoscategory"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lanches"
+                android:fontFamily="@font/latoregular"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/category_porcoes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="16dp"
+            android:layout_margin="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@color/white"
+            android:elevation="4dp"
+            >
+
+            <ImageView
+                android:id="@+id/img_category_porcoes"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/porcoescategory"
+                />
+
+            <TextView
+                android:id="@+id/txt_category_porcoes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Porcoes"
+                android:fontFamily="@font/latoregular"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/category_bebidas"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="16dp"
+            android:layout_margin="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@color/white"
+            android:elevation="4dp"
+            >
+
+            <ImageView
+                android:id="@+id/img_category_bebidas"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/bebidascategory"
+                />
+
+            <TextView
+                android:id="@+id/txt_category_bebidas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bebidas"
+                android:fontFamily="@font/latoregular"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/category_all"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="16dp"
+            android:layout_margin="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@color/white"
+            android:elevation="4dp"
+            >
+
+            <ImageView
+                android:id="@+id/img_category_all"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/boxes"
+                />
+
+            <TextView
+                android:id="@+id/txt_category_drink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Todos"
+                android:fontFamily="@font/latoregular"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintTop_toBottomOf="@id/layout_category"
         >
 
         <LinearLayout
@@ -46,6 +194,7 @@
             />
 
         <TextView
+            android:id="@+id/text_view_title_list_products"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
