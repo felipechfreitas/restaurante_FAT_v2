@@ -42,7 +42,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProdutoV
             nomeProduto = itemView.findViewById(R.id.txt_nome_produto);
             descricaoProduto = itemView.findViewById(R.id.txt_desc_produto);
             precoProduto = itemView.findViewById(R.id.txt_preco_produto);
-
         }
     }
 
