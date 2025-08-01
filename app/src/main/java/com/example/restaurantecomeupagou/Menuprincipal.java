@@ -44,7 +44,7 @@ public class Menuprincipal extends AppCompatActivity {
         setContentView(R.layout.activity_menuprincipal);
 
         listaProdutoDestaque = findViewById(R.id.recycler);
-        listaProdutoDestaque.setLayoutManager(new LinearLayoutManager(this));
+        listaProdutoDestaque.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
 //        List<Produto> produtos = new ArrayList<>();
 //        produtos.add(new Produto("Bife a cavalo", "Descricao do produto 1", 45.00, R.drawable.bac));
@@ -54,28 +54,13 @@ public class Menuprincipal extends AppCompatActivity {
         obterProdutosDestaques();
 
         linearButtonLanches = findViewById(R.id.category_lanches);
-        linearButtonLanches.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                irCatalog(v, "L");
-            }
-        });
+        linearButtonLanches.setOnClickListener(v -> irCatalog("Lanches"));
 
         linearButtonPorcoes = findViewById(R.id.category_porcoes);
-        linearButtonPorcoes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                irCatalog(v, "P");
-            }
-        });
+        linearButtonPorcoes.setOnClickListener(v -> irCatalog("Porções"));
 
         linearButtonBebidas = findViewById(R.id.category_bebidas);
-        linearButtonBebidas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                irCatalog(v, "B");
-            }
-        });
+        linearButtonBebidas.setOnClickListener(v -> irCatalog("Bebidas"));
 //        ProductAdapter adapter = new ProductAdapter(produtos);
 //        listaProdutoDestaque.setAdapter(adapter);
 
@@ -91,12 +76,12 @@ public class Menuprincipal extends AppCompatActivity {
 
             @Override
             public void onError(String errorMessage) {
-                Toast.makeText(Menuprincipal.this, "Erro ao listar produtos: " + errorMessage, Toast.LENGTH_LONG).show();
+                Toast.makeText(Menuprincipal.this, "Erro ao listar produtos em destaque: " + errorMessage, Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    public void irCatalog(View view, String categoria) {
+    public void irCatalog(String categoria) {
         Intent intent = new Intent(Menuprincipal.this, CatalogActivity.class);
         intent.putExtra(Constants.INTENT_CATEGORIA, categoria);
         startActivity(intent);

@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.restaurantecomeupagou.ProductDetailActivity;
 import com.example.restaurantecomeupagou.R;
+import com.example.restaurantecomeupagou.data.remote.CarrinhoSingleton;
 import com.example.restaurantecomeupagou.model.Produto;
 import com.example.restaurantecomeupagou.utils.Constants;
 
@@ -35,6 +38,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProdutoV
         public TextView nomeProduto;
         public TextView descricaoProduto;
         public TextView precoProduto;
+        public Button buttonAddToCart;
 
         public ProdutoViewHolder(View itemView) {
             super(itemView);
@@ -42,6 +46,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProdutoV
             nomeProduto = itemView.findViewById(R.id.txt_nome_produto);
             descricaoProduto = itemView.findViewById(R.id.txt_desc_produto);
             precoProduto = itemView.findViewById(R.id.txt_preco_produto);
+            buttonAddToCart = itemView.findViewById(R.id.button_add_to_cart);
         }
     }
 
@@ -73,8 +78,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProdutoV
             public void onClick(View v) {
                 Intent intent = new Intent(context, ProductDetailActivity.class);
                 intent.putExtra(Constants.INTENT_PRODUTO_ID, String.valueOf(produto.getId()));
+                intent.putExtra("produto", produto);
                 context.startActivity(intent);
             }
+        });
+
+        holder.buttonAddToCart.setOnClickListener(v -> {
+            CarrinhoSingleton.getInstance(context).adicionarProduto(produto);
+            Toast.makeText(context, produto.getNome() + " adicionado ao carrinho!", Toast.LENGTH_SHORT).show();
         });
     }
 

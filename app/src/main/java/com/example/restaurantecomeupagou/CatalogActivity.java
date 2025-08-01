@@ -67,7 +67,11 @@ public class CatalogActivity extends AppCompatActivity {
 //        listaProdutoCatalogo.setAdapter(adapter);
 
         obterProdutos();
+        setupSearchListener();
+        setupCategoryListeners();
+    }
 
+    private void setupSearchListener() {
         editTextBusca.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -81,61 +85,53 @@ public class CatalogActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String palavraBusca = s.toString();
+                String palavraBusca = s.toString().trim();
 
-                if (palavraBusca.isBlank()) {
+                if (palavraBusca.isEmpty()) {
                     productAdapter = new ProductAdapter(produtoList, CatalogActivity.this);
                     listaProdutoCatalogo.setAdapter(productAdapter);
-                    return;
-                }
+                    textViewTitleListProducts.setText("Todos os Produtos");
 
-                if (palavraBusca.length() >= 3) {
+                } else if (palavraBusca.length() >= 3) {
                     List<Produto> produtosFiltrados = filtrarProdutosNome(palavraBusca);
                     productAdapter = new ProductAdapter(produtosFiltrados, CatalogActivity.this);
                     listaProdutoCatalogo.setAdapter(productAdapter);
+                    textViewTitleListProducts.setText("Resultados da Busca");
                 }
             }
         });
+    }
+
+    private void setupCategoryListeners() {
 
         linearButtonLanches = findViewById(R.id.category_lanches);
         linearButtonLanches.setOnClickListener(v -> {
-            List<Produto> produtosFiltrados = filtrarProdutosCategoria("L");
-            productAdapter = new ProductAdapter(produtosFiltrados, CatalogActivity.this);
-            listaProdutoCatalogo.setAdapter(productAdapter);
-            textViewTitleListProducts.setText("Lanches");
+            filtrarEExibirProdutos("Lanches", "L");
         });
 
         linearButtonPorcoes = findViewById(R.id.category_porcoes);
-        linearButtonPorcoes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<Produto> produtosFiltrados = filtrarProdutosCategoria("P");
-                productAdapter = new ProductAdapter(produtosFiltrados, CatalogActivity.this);
-                listaProdutoCatalogo.setAdapter(productAdapter);
-                textViewTitleListProducts.setText("Porções");
-            }
+        linearButtonPorcoes.setOnClickListener(v -> {
+            filtrarEExibirProdutos("Porções", "P");
         });
 
         linearButtonBebidas = findViewById(R.id.category_bebidas);
-        linearButtonBebidas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<Produto> produtosFiltrados = filtrarProdutosCategoria("B");
-                productAdapter = new ProductAdapter(produtosFiltrados, CatalogActivity.this);
-                listaProdutoCatalogo.setAdapter(productAdapter);
-                textViewTitleListProducts.setText("Bebidas");
-            }
+        linearButtonBebidas.setOnClickListener(v -> {
+            filtrarEExibirProdutos("Bebidas", "B");
         });
 
         linearButtonTodos = findViewById(R.id.category_all);
-        linearButtonTodos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                productAdapter = new ProductAdapter(produtoList, CatalogActivity.this);
-                listaProdutoCatalogo.setAdapter(productAdapter);
-                textViewTitleListProducts.setText("Todos os Produtos");
-            }
+        linearButtonTodos.setOnClickListener(v -> {
+            productAdapter = new ProductAdapter(produtoList, CatalogActivity.this);
+            listaProdutoCatalogo.setAdapter(productAdapter);
+            textViewTitleListProducts.setText("Todos os Produtos");
         });
+    }
+
+    private void filtrarEExibirProdutos(String titulo, String categoriaCodigo) {
+        List<Produto> produtosFiltrados = filtrarProdutosCategoria(categoriaCodigo);
+        productAdapter = new ProductAdapter(produtosFiltrados, CatalogActivity.this);
+        listaProdutoCatalogo.setAdapter(productAdapter);
+        textViewTitleListProducts.setText(titulo);
     }
 
     private void obterProdutos() {
@@ -143,29 +139,48 @@ public class CatalogActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Produto> produtos) {
                 produtoList = produtos;
-                List<Produto> produtosFiltrados = null;
+                List<Produto> produtosParaExibir = produtos;
 
                 Intent intent = getIntent();
                 if (intent != null) {
-                    String categoria = intent.getStringExtra(Constants.INTENT_CATEGORIA);
-                    if (categoria != null) {
-                        if (categoria.equals("L")) {
-                            textViewTitleListProducts.setText("Lanches");
-                        } else if (categoria.equals("P")) {
-                            textViewTitleListProducts.setText("Porções");
-                        } else if (categoria.equals("B")) {
-                            textViewTitleListProducts.setText("Bebidas");
+                    String categoriaPassada = intent.getStringExtra(Constants.INTENT_CATEGORIA);
+                    if (categoriaPassada != null && !categoriaPassada.isEmpty()) {
+                        String categoriaCodigo = "";
+                        String tituloDisplay = "";
+
+                        switch (categoriaPassada) {
+                            case "Lanches":
+                                categoriaCodigo = "L";
+                                tituloDisplay = "Lanches";
+                                break;
+                            case "Porções":
+                                categoriaCodigo = "P";
+                                tituloDisplay = "Porções";
+                                break;
+                            case "Bebidas":
+                                categoriaCodigo = "B";
+                                tituloDisplay = "Bebidas";
+                                break;
+                            case "Todos":
+                            default:
+                                categoriaCodigo = "";
+                                tituloDisplay = "Todos os Produtos";
+                                break;
                         }
-                        produtosFiltrados = filtrarProdutosCategoria(categoria);
+
+
+                        if (!categoriaCodigo.isEmpty()) {
+                            produtosParaExibir = filtrarProdutosCategoria(categoriaCodigo);
+                        }
+                        textViewTitleListProducts.setText(tituloDisplay);
+                    } else {
+                        textViewTitleListProducts.setText("Todos os Produtos");
                     }
-                }
-
-                if (produtosFiltrados != null) {
-                    productAdapter = new ProductAdapter(produtosFiltrados, CatalogActivity.this);
                 } else {
-                    productAdapter = new ProductAdapter(produtos, CatalogActivity.this);
+                    textViewTitleListProducts.setText("Todos os Produtos");
                 }
 
+                productAdapter = new ProductAdapter(produtosParaExibir, CatalogActivity.this);
                 listaProdutoCatalogo.setAdapter(productAdapter);
             }
 
@@ -185,7 +200,7 @@ public class CatalogActivity extends AppCompatActivity {
 
     private List<Produto> filtrarProdutosCategoria(String categoria) {
         return produtoList.stream()
-                .filter(produto -> produto.getCategoria().equals(categoria))
+                .filter(produto -> produto.getCategoria().equalsIgnoreCase(categoria))
                 .collect(Collectors.toList());
     }
 }
