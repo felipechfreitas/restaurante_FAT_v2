@@ -1,8 +1,12 @@
 package com.example.restaurantecomeupagou.model;
 
-public class ItemCarrinho {
+import java.io.Serializable;
+
+public class ItemCarrinho implements Serializable {
     private Produto produto;
     private int quantidade;
+
+    public ItemCarrinho() {}
 
     public ItemCarrinho(Produto produto, int quantidade) {
         this.produto = produto;

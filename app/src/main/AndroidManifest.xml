@@ -27,10 +27,6 @@
             android:exported="false" />
 
         <activity
-            android:name=".OrderTrackingActivity"
-            android:exported="false" />
-
-        <activity
             android:name=".MyOrdersActivity"
             android:exported="false" />
 

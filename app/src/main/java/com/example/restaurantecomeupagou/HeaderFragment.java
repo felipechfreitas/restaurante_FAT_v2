@@ -82,6 +82,14 @@ public class HeaderFragment extends Fragment {
                     intent = new Intent(getActivity(), CatalogActivity.class);
                 }
 
+                if (id == R.id.item_cart) {
+                    intent = new Intent(getActivity(), CartActivity.class);
+                }
+
+                if (id == R.id.item_orders) {
+                    intent = new Intent(getActivity(), MyOrdersActivity.class);
+                }
+
                 if (id == R.id.item_profile) {
                     intent = new Intent(getActivity(), UserProfileActivity.class);
                 }
